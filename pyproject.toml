@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mitobender"
+version = "0.1.0"
+description = "script to remove ambient mtDNA background from mgatk output using CellBender"
+authors = [{ name = "Benedikt Obermayer", email = "benedikt.obermayer@bih-charite.de" }]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = ["click"]
+
+[project.scripts]
+mitobender = "mitobender.cli:cli"
+
+[tool.setuptools.package-data]
+"mitobender.R" = ["*.R"]
