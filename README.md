@@ -1,7 +1,7 @@
 # mitobender
 
 mitobender is a script to remove ambient mtDNA signal from [mgatk](github.com/caleblareau/mgatk) output based on [cellbender](github.com/broadinstitute/CellBender). it's provided here as 
-standalone tool for easier installation and maintenance (otherwise identical to `mgatk remove-background`).
+standalone tool for easier installation and maintenance (otherwise identical to the deprecated `mgatk remove-background` functionality).
 
 # installation
 
@@ -17,7 +17,7 @@ pip install git+https://github.com/bihealth/mitobender.git
 
 # preparation
 
-in order to estimate ambient mtDNA levels, mgatk needs to be run on nearly-empty droplets as well as barcodes called by cellranger as proper nuclei-containing droplets. by default, we recommend using the top 20000 barcodes ranked by peak_region_fragments (column 18 in singlecell.csv) while removing barcodes with nonzero mitochondrial count (column 7 in singlecell.csv):
+in order to estimate ambient mtDNA levels, mgatk needs to be run on nearly-empty droplets as well as barcodes called by cellranger as proper nuclei-containing droplets. by default, we recommend using the top 20000 barcodes ranked by peak_region_fragments (column 18 in singlecell.csv) while removing barcodes without mitochondrial count (column 7 in singlecell.csv):
 
 ```
 sort -rgk 18 -t ',' cellranger_output/outs/singlecell.csv | awk -F "\"*,\"*" '$7  > 0 {print}' | head -n 20000 | cut -f 1 -d ',' > top20k_barcodes.tsv
